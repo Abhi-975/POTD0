@@ -1,0 +1,42 @@
+// solution of POTD of GFG 22/11/2024
+// QUESTION
+
+Given an array prices[] of length n, representing the prices of the stocks on different days. The task is to find the maximum profit possible by buying and selling the stocks on 
+different days when at most one transaction is allowed. Here one transaction means 1 buy + 1 Sell. If it is not possible to make a profit then return 0.
+Note: Stock must be bought before being sold.
+
+// first solution
+
+int maximumProfit(vector<int> &prices) {
+        // code here
+        int n = prices.size();
+        int i=0;
+        int j=0;
+        int res = 0;
+        while(j<n){
+            while(i<n-1 && prices[j]<prices[i+1]){
+                res = max(res , prices[i+1]-prices[j]);
+                i++;
+            }
+            if(i>=n){
+                break;
+            }
+            i++;
+            j=i;
+        }
+        return res;
+    }
+
+
+// another solution
+
+int maximumProfit(int prices[]) {
+        // Code here
+        int min = Integer.MAX_VALUE;
+        int ans = 0;
+        for(int price: prices){
+            min = Math.min(min, price);
+            ans = Math.max(ans, price - min);
+        }
+        return ans;
+}
